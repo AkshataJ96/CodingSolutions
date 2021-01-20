@@ -1,4 +1,5 @@
 # Solutions for coding problems such as :
-Hackearth, 
-CodeWars-Kata, 
-Google-Hashcode
+
+1)Hackearth,
+2)CodeWars-Kata, 
+3)Google-Hashcode
