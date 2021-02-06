@@ -8,9 +8,10 @@ int main() {
 	string input_path = "/mnt/d/code/hashcode/CodingSolutions/hashcode2021/practice/sampleInput/a_example.txt";
 
 	long unsigned int numBooks, numLibraries, numDays;
+    list<Book> books;
 
 	InputReader inputReader(input_path);
-	inputReader.getMetaData(numBooks, numLibraries, numDays);
+	inputReader.getMetaData(numBooks, numLibraries, numDays, books);
     std::cout << "Details received are " <<numBooks << numLibraries << numDays << endl;
 
 	// list<Library> libraries = inputReader.getLibraries();

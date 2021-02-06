@@ -15,7 +15,7 @@ class InputReader {
     public:
         InputReader(string inp_path);
         ~InputReader();
-        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays);
+        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays, list<Book>& books);
 		list<Library> getLibraries();
 		list<Book> getBooks();
 
@@ -37,7 +37,7 @@ class OutputWriter {
 
 class Book {
     public:
-        Book();
+        Book(long unsigned int id, long unsigned int score);
         ~Book();
         void getScore();
         void getID();
