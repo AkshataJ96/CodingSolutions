@@ -35,7 +35,7 @@ InputReader::~InputReader() {
     // Empty
 }
 
-void InputReader::getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays, list<Book>& books) {
+void InputReader::getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays, list<Book>& books, list<Library>& libs) {
     //  add a filepath assert here
     ifstream metaFile;
     metaFile.open(filepath);
@@ -63,6 +63,24 @@ void InputReader::getMetaData(long unsigned int& numBooks, long unsigned int& nu
         books.push_back(book);
     }
 
+    vector<string> library; 
+    vector<string> libraryBooks; 
+    for (int i = 0; i < numLibraries; i++) {
+        library.clear();
+        libraryBooks.clear();
+        std::getline(metaFile, line);
+        opsize = split(line, library, ' ');
+        Library lib(i, std::stoul(library[0]), std::stoul(library[1]), std::stoul(library[2]));
+        cout << "library are  : " << i << library[0] << library[1] << library[2] << endl;
+
+        std::getline(metaFile, line);
+        opsize = split(line, libraryBooks, ' ');
+        for (int j = 0; j < libraryBooks.size(); ++j) {
+            lib.sortedBooks.push_back(std::stoul(libraryBooks[i]));
+        }
+        cout << "Library " << i << " Book ids are " << line << endl;
+        libs.push_back(lib);
+    }
 
     metaFile.close();
 
@@ -74,5 +92,16 @@ Book::Book(long unsigned int id, long unsigned int score) {
 }
 
 Book::~Book() {
+    // Empty
+}
+
+Library::Library(long unsigned int id ,long unsigned int numBooks, unsigned int signUpTime, unsigned int numBooksPerDay) {
+    this->id = id;
+    this->numBooks = numBooks;
+    this->signUpTime - signUpTime;
+    this->numBooksPerDay = numBooksPerDay;
+}
+
+Library::~Library() {
     // Empty
 }

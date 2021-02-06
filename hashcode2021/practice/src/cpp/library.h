@@ -15,7 +15,7 @@ class InputReader {
     public:
         InputReader(string inp_path);
         ~InputReader();
-        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays, list<Book>& books);
+        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays, list<Book>& books, list<Library>& libs);
 		list<Library> getLibraries();
 		list<Book> getBooks();
 
@@ -50,18 +50,19 @@ class Book {
 
 class Library {
     public:
-        Library();
+        Library(long unsigned int id ,long unsigned int numBooks, unsigned int signUpTime, unsigned int numBooksPerDay);
         ~Library();
         void isSigned();
         void getBooks();
         void signUp();
         void getCurrentDaysBooks();
+        vector<int> sortedBooks;
     
     private:
         long unsigned int id;
+        long unsigned int numBooks;
         unsigned int signUpTime;
         unsigned int numBooksPerDay;
-        list<Book> sortedBooks;
 
 };
 

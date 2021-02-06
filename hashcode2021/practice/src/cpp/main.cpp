@@ -9,9 +9,10 @@ int main() {
 
 	long unsigned int numBooks, numLibraries, numDays;
     list<Book> books;
+    list<Library> libs;
 
 	InputReader inputReader(input_path);
-	inputReader.getMetaData(numBooks, numLibraries, numDays, books);
+	inputReader.getMetaData(numBooks, numLibraries, numDays, books, libs);
     std::cout << "Details received are " <<numBooks << numLibraries << numDays << endl;
 
 	// list<Library> libraries = inputReader.getLibraries();
