@@ -1,0 +1,4 @@
+1) take input from file (input parsing and setting up internal variables)
+2) determine library id order for signup
+3) select books per library for scanning
+4) order of books to be sent for scan on a particular day
