@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <list>
 
 using namespace std;
 
@@ -7,7 +7,9 @@ class InputReader {
     public:
         InputReader(string inp_path);
         ~InputReader();
-        void read();
+        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays);
+		list<Library> getLibraries();
+		list<Book> getBooks();
 
     private:
         string filepath;
@@ -51,6 +53,6 @@ class Library {
         long unsigned int id;
         unsigned int signUpTime;
         unsigned int numBooksPerDay;
-        std::vector<Book> totalBooks;
+        list<Book> totalBooks;
 
 };
