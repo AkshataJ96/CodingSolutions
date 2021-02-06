@@ -1,6 +1,30 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
+class InputReader {
+    public:
+        InputReader(string inp_path);
+        ~InputReader();
+        void read();
+
+    private:
+        string filepath;
+
+};
+
+class OutputWriter {
+    public:
+        OutputWriter(string op_path);
+        ~OutputWriter();
+        void write();
+
+    private:
+        string filepath;
+
+};
+
 class Book {
     public:
         Book();
