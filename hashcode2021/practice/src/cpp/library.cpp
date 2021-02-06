@@ -4,65 +4,9 @@
 #include <vector>
 #include <list>
 
+#include "library.h"
+
 using namespace std;
-
-class Library;
-class Book;
-
-class InputReader {
-    public:
-        InputReader(string inp_path);
-        ~InputReader();
-        void getMetaData(long unsigned int& numBooks, long unsigned int& numLibraries, long unsigned int& numDays);
-		list<Library> getLibraries();
-		list<Book> getBooks();
-
-    private:
-        string filepath;
-
-};
-
-class OutputWriter {
-    public:
-        OutputWriter(string op_path);
-        ~OutputWriter();
-        void write();
-
-    private:
-        string filepath;
-
-};
-
-class Book {
-    public:
-        Book();
-        ~Book();
-        void getScore();
-        void getID();
-    
-    private:
-        long unsigned int id;
-        long unsigned int score;
-
-};
-
-class Library {
-    public:
-        Library();
-        ~Library();
-        void isSigned();
-        void getBooks();
-        void signUp();
-        void getCurrentDaysBooks();
-    
-    private:
-        long unsigned int id;
-        unsigned int signUpTime;
-        unsigned int numBooksPerDay;
-        list<Book> sortedBooks;
-
-};
-
 static size_t split(const std::string &txt, std::vector<std::string> &strs, char ch)
 {
     size_t pos = txt.find( ch );
@@ -96,13 +40,17 @@ void InputReader::getMetaData(long unsigned int& numBooks, long unsigned int& nu
     ifstream metaFile;
     metaFile.open(filepath);
     string metadata;
+
+    // vector<string> data; 
+    // size_t opsize = split(metadata, data, ' ');
+    // std::cout << "First line of file is  " << opsize << endl;
+    // assert(opsize==3);
     metaFile >> metadata;
-    vector<string> data; 
-    size_t opsize = split(metadata, data, ' ');
-    assert(opsize==3);
-    numBooks = std::stoul(data[0]);
-    numLibraries = std::stoul(data[1]);
-    numDays = std::stoul(data[2]);
+    numBooks = std::stoul(metadata);
+    metaFile >> metadata;
+    numLibraries = std::stoul(metadata);
+    metaFile >> metadata;
+    numDays = std::stoul(metadata);
     metaFile.close();
 
 } 
