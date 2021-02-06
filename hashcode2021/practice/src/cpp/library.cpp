@@ -1,6 +1,19 @@
 #include <iostream>
 #include <vector>
 
+class Book {
+    public:
+        Book();
+        ~Book();
+        void getScore();
+        void getID();
+    
+    private:
+        long unsigned int id;
+        long unsigned int score;
+
+};
+
 class Library {
     public:
         Library();
@@ -14,6 +27,6 @@ class Library {
         long unsigned int id;
         unsigned int signUpTime;
         unsigned int numBooksPerDay;
-        std::vector<unsigned int> totalBooks;
+        std::vector<Book> totalBooks;
 
 };
