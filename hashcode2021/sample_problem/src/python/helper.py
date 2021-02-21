@@ -20,6 +20,7 @@ def read_input(inp):
 
     with open(inp, 'r') as f:
         meta = f.readline().replace('\n', '')
+        meta = meta.split(' ')
 
         pizzas = list()
         for pizza_id, pizza in enumerate(f):
@@ -28,7 +29,6 @@ def read_input(inp):
             num_ingd = int(p_details.pop(0))
             pizzas.append(Pizza(pizza_id, num_ingd, p_details))
     
-    meta = meta.split(' ')
     return meta, pizzas
 
 
