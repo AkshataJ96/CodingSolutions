@@ -19,10 +19,11 @@ def read_input(inp):
     assert inp != ''
 
     with open(inp, 'r') as f:
-        meta = f.readline()
+        meta = f.readline().replace('\n', '')
 
         pizzas = list()
         for pizza_id, pizza in enumerate(f):
+            pizza = pizza.replace('\n', '')
             p_details = pizza.split(' ')
             num_ingd = int(p_details.pop(0))
             pizzas.append(Pizza(pizza_id, num_ingd, p_details))
@@ -44,11 +45,15 @@ def cal_combi_score(pizzas):
     print(score)
     return score
 
+def get_all_pcombinations(pizzas, team_size):
+    pass
+
 if __name__ == '__main__':    
     meta, pizzas = read_input('../../ref/a_example')
-    print(f"Meta is {meta}, Pizza are {pizzas}")
+    print(f"Meta is {meta}, Pizza are {pizzas[0]}")
     
     num_pizzas = int(meta[0])
+    assert num_pizzas == len(pizzas)
     num_2_member_team = int(meta[1])
     num_3_member_team = int(meta[2])
     num_4_member_team = int(meta[3])
