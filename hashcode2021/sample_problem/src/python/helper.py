@@ -1,3 +1,5 @@
+import itertools
+
 class Pizza:
     '''
     Describe pizza
@@ -46,7 +48,8 @@ def cal_combi_score(pizzas):
     return score
 
 def get_all_pcombinations(pizzas, team_size):
-    pass
+    for i in itertools.combinations(pizzas, team_size):
+        print(i[0], i[1])
 
 if __name__ == '__main__':    
     meta, pizzas = read_input('../../ref/a_example')
@@ -60,3 +63,6 @@ if __name__ == '__main__':
 
     combination = [pizzas[1], pizzas[4]]
     score = cal_combi_score(combination)
+    get_all_pcombinations(pizzas, 2)
+    # for combi in get_all_pcombinations('ABCD', 2):
+        # print(f'Combination {combi[0]} {combi[0]}')
