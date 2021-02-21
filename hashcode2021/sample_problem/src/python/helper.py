@@ -14,6 +14,30 @@ class Pizza:
     def __str__(self):
         return f"Pizza {self.id} ingredients list {self.ingredients}"
 
+class CombinationStack:
+    def __init__(self):
+        self.all_combi = list()
+    
+    def _sort_combinations(self):
+        self.all_combi = sorted(self.all_combi, key=lambda x:x[1])
+    
+    def add_combination(self, combinations):
+        assert self.all_combi is not None
+        assert combinations is not None
+        assert isinstance(combinations, list)
+
+        self.all_combi.extend(combinations)
+        self._sort_combinations()
+
+    def print_com(self):
+        temp = ""
+        for comb in self.all_combi:
+            temp = f'Score of {comb[1]}\n'
+            for c in comb[0]:
+                temp = temp + f" {c}\n"
+            print(temp)
+
+
 ################################
 
 def read_input(inp):
@@ -66,5 +90,10 @@ if __name__ == '__main__':
 
     combination = [pizzas[1], pizzas[4]]
     score = cal_combi_score(combination)
-    combinations = get_all_pcombinations(pizzas, 2)
-    print(combinations)
+
+    cm = CombinationStack()
+    cm.add_combination(get_all_pcombinations(pizzas, 2))
+    cm.add_combination(get_all_pcombinations(pizzas, 3))
+    cm.add_combination(get_all_pcombinations(pizzas, 4))
+
+    cm.print_com()
