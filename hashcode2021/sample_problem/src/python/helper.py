@@ -35,7 +35,7 @@ def read_input(inp):
 
 
 def cal_combi_score(pizzas):
-    assert isinstance(pizzas, list)
+    assert isinstance(pizzas, list) or isinstance(pizzas, tuple)
     ingredients = set()
 
     for pizza in pizzas:
@@ -44,12 +44,15 @@ def cal_combi_score(pizzas):
     
     # print(ingredients)
     score = len(ingredients)
-    print(score)
+    # print(score)
     return score
 
 def get_all_pcombinations(pizzas, team_size):
-    for i in itertools.combinations(pizzas, team_size):
-        print(i[0], i[1])
+    combinations = list()
+    for combi in itertools.combinations(pizzas, team_size):
+        score = cal_combi_score(combi)
+        combinations.append([combi, score])
+    return combinations
 
 if __name__ == '__main__':    
     meta, pizzas = read_input('../../ref/a_example')
@@ -63,6 +66,5 @@ if __name__ == '__main__':
 
     combination = [pizzas[1], pizzas[4]]
     score = cal_combi_score(combination)
-    get_all_pcombinations(pizzas, 2)
-    # for combi in get_all_pcombinations('ABCD', 2):
-        # print(f'Combination {combi[0]} {combi[0]}')
+    combinations = get_all_pcombinations(pizzas, 2)
+    print(combinations)
