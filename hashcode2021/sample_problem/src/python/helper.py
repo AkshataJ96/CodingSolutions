@@ -2,7 +2,7 @@ class Pizza:
     '''
     Describe pizza
     '''
-    def __init__(self, id,num_ingd, ingredients):
+    def __init__(self, id, num_ingd, ingredients):
         assert isinstance(ingredients, list)
         assert num_ingd == len(ingredients)
         self.id = id
@@ -13,12 +13,6 @@ class Pizza:
         return f"Pizza {self.id} ingredients list {self.ingredients}"
 
 ################################
-
-num_pizzas = 0
-num_2_member_team = 0
-num_3_member_team = 0
-num_4_member_team = 0
-
 
 def read_input(inp):
     assert inp is not None
@@ -37,7 +31,20 @@ def read_input(inp):
     return meta, pizzas
 
 
-if __name__ == '__main__':
+def cal_combi_score(pizzas):
+    assert isinstance(pizzas, list)
+    ingredients = set()
+
+    for pizza in pizzas:
+        for i in pizza.ingredients:
+            ingredients.add(i)
+    
+    # print(ingredients)
+    score = len(ingredients)
+    print(score)
+    return score
+
+if __name__ == '__main__':    
     meta, pizzas = read_input('../../ref/a_example')
     print(f"Meta is {meta}, Pizza are {pizzas}")
     
@@ -45,3 +52,6 @@ if __name__ == '__main__':
     num_2_member_team = int(meta[1])
     num_3_member_team = int(meta[2])
     num_4_member_team = int(meta[3])
+
+    combination = [pizzas[1], pizzas[4]]
+    score = cal_combi_score(combination)
