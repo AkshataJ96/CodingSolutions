@@ -126,6 +126,7 @@ if __name__ == '__main__':
 
     cm.print_com()
 
+    output = list()
     try:
         while 1:
             combination = cm.get_next()
@@ -135,5 +136,6 @@ if __name__ == '__main__':
                 for pizza in pizzas:
                     t = t + f' {pizza.id}'
                 print(t)
+                output.append(t)
     except IndexError as ex:
         print(f"All combinations are exhausted")
