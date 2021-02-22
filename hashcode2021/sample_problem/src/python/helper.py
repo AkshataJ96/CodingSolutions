@@ -17,6 +17,7 @@ class Pizza:
 class CombinationStack:
     def __init__(self):
         self.all_combi = list()
+        self.used_pizza = list()
     
     def _sort_combinations(self):
         self.all_combi = sorted(self.all_combi, key=lambda x:x[1])
@@ -28,6 +29,33 @@ class CombinationStack:
 
         self.all_combi.extend(combinations)
         self._sort_combinations()
+
+    def is_writable(self, combination):
+        pizzas = combination[0]
+        for pizza in pizzas:
+            if pizza.id in self.used_pizza:
+                return False
+        return True
+
+    def update_used_pizzas(self,combination):
+        for pizza in combination[0]:
+            self.used_pizza.append(pizza.id)
+    
+    def get_next(self):
+        assert self.all_combi is not None
+        assert self.used_pizza is not None
+        
+        ret_combi = None
+        combination = self.all_combi.pop(0)
+        writable = self.is_writable(combination)
+
+        if writable:
+            self.update_used_pizzas(combination)
+            ret_combi = combination
+
+        return ret_combi
+
+
 
     def print_com(self):
         temp = ""
