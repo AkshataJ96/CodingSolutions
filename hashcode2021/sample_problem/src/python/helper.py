@@ -19,7 +19,7 @@ class CombinationStack:
         self.all_combi = list()
     
     def _sort_combinations(self):
-        self.all_combi = sorted(self.all_combi, key=lambda x:x[1])
+        self.all_combi = sorted(self.all_combi, key=lambda x:x[1], reverse=True)
     
     def add_combination(self, combinations):
         assert self.all_combi is not None
