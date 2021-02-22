@@ -44,7 +44,7 @@ class CombinationStack:
     def get_next(self):
         assert self.all_combi is not None
         assert self.used_pizza is not None
-        
+
         ret_combi = None
         combination = self.all_combi.pop(0)
         writable = self.is_writable(combination)
@@ -125,3 +125,15 @@ if __name__ == '__main__':
     cm.add_combination(get_all_pcombinations(pizzas, 4))
 
     cm.print_com()
+
+    try:
+        while 1:
+            combination = cm.get_next()
+            if combination:
+                pizzas = combination[0]
+                t = f"{len(pizzas)}"
+                for pizza in pizzas:
+                    t = t + f' {pizza.id}'
+                print(t)
+    except IndexError as ex:
+        print(f"All combinations are exhausted")
