@@ -1,3 +1,4 @@
+import copy
 import itertools
 
 class Pizza:
@@ -41,6 +42,9 @@ class CombinationStack:
         for pizza in combination[0]:
             self.used_pizza.append(pizza.id)
     
+    def get_max_possible_score(self):
+        return self.all_combi[0][1]
+
     def get_next(self):
         assert self.all_combi is not None
         assert self.used_pizza is not None
@@ -126,16 +130,42 @@ if __name__ == '__main__':
 
     cm.print_com()
 
-    output = list()
-    try:
-        while 1:
-            combination = cm.get_next()
-            if combination:
-                pizzas = combination[0]
-                t = f"{len(pizzas)}"
-                for pizza in pizzas:
-                    t = t + f' {pizza.id}'
-                print(t)
-                output.append(t)
-    except IndexError as ex:
-        print(f"All combinations are exhausted")
+    all_ops = (list(), 0)
+    cmtest = copy.deepcopy(cm)
+    max_score = cmtest.get_max_possible_score()
+    score = max_score
+    pop_count = 0
+    while score >= max_score:
+        output = list()
+        cmtest = copy.deepcopy(cm)
+        for _ in range(pop_count):
+            cmtest.all_combi.pop(0)
+        
+        score = cmtest.get_max_possible_score()
+        try:
+            while 1:
+                combination = cmtest.get_next()
+                if combination:
+                    pizzas = combination[0]
+                    t = f"{len(pizzas)}"
+                    for pizza in pizzas:
+                        t = t + f' {pizza.id}'
+                    print(t)
+                    output.append([t,combination[1]])
+        except IndexError as ex:
+            print(f"All combinations are exhausted")
+            pop_count = pop_count + 1
+            sc = 0
+            for op in output:
+                print(f"Int op {op}")
+                sc = sc + op[1]*op[1]
+            if sc > all_ops[1]:
+                all_ops = (output, sc)
+
+    print(f"finall op \n {all_ops}")
+
+            
+
+            
+
+            
