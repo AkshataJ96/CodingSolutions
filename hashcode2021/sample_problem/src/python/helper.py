@@ -16,9 +16,13 @@ class Pizza:
         return f"Pizza {self.id} ingredients list {self.ingredients}"
 
 class CombinationStack:
-    def __init__(self):
+    def __init__(self, num_2_member_team, num_3_member_team, num_4_member_team, num_pizzas):
         self.all_combi = list()
         self.used_pizza = list()
+        self.num_2_member_team = num_2_member_team
+        self.num_3_member_team = num_3_member_team
+        self.num_4_member_team = num_4_member_team
+        self.num_pizzas = num_pizzas
     
     def _sort_combinations(self):
         self.all_combi = sorted(self.all_combi, key=lambda x:x[1], reverse=True)
@@ -41,6 +45,7 @@ class CombinationStack:
     def update_used_pizzas(self,combination):
         for pizza in combination[0]:
             self.used_pizza.append(pizza.id)
+            self.num_pizzas = self.num_pizzas - 1
     
     def get_max_possible_score(self):
         return self.all_combi[0][1]
@@ -51,6 +56,13 @@ class CombinationStack:
 
         ret_combi = None
         combination = self.all_combi.pop(0)
+        self.num_4_member_team = self.num_4_member_team - 1
+        self.num_2_member_team = self.num_2_member_team - 1
+        self.num_3_member_team = self.num_3_member_team - 1
+
+        if num_2_member_team <= 0 or num_3_member_team <= 0 or num_4_member_team <= 0:
+            return None
+        
         writable = self.is_writable(combination)
 
         if writable:
@@ -111,7 +123,8 @@ def get_all_pcombinations(pizzas, team_size):
     return combinations
 
 if __name__ == '__main__':    
-    meta, pizzas = read_input('../../ref/a_example')
+    meta, pizzas = read_input('../../ref/b_little_bit_of_everything.in')
+    #meta, pizzas = read_input('../../ref/a_example')
     print(f"Meta is {meta}, Pizza are {pizzas[0]}")
     
     num_pizzas = int(meta[0])
@@ -123,12 +136,12 @@ if __name__ == '__main__':
     combination = [pizzas[1], pizzas[4]]
     score = cal_combi_score(combination)
 
-    cm = CombinationStack()
+    cm = CombinationStack(num_2_member_team, num_3_member_team, num_4_member_team, num_pizzas)
     cm.add_combination(get_all_pcombinations(pizzas, 2))
     cm.add_combination(get_all_pcombinations(pizzas, 3))
     cm.add_combination(get_all_pcombinations(pizzas, 4))
 
-    cm.print_com()
+    #cm.print_com()
 
     all_ops = (list(), 0)
     cmtest = copy.deepcopy(cm)
@@ -163,9 +176,3 @@ if __name__ == '__main__':
                 all_ops = (output, sc)
 
     print(f"finall op \n {all_ops}")
-
-            
-
-            
-
-            
