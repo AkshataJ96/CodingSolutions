@@ -122,8 +122,17 @@ def get_all_pcombinations(pizzas, team_size):
         combinations.append([combi, score])
     return combinations
 
-if __name__ == '__main__':    
-    meta, pizzas = read_input('../../ref/b_little_bit_of_everything.in')
+def write_op(result, name):
+    with open(f"{name}_out", "w") as f:
+        f.write(f"{len(result[0])}\n")
+        for delivery in result[0]:
+            f.writelines(delivery[0])
+            f.writelines('\n')
+
+
+if __name__ == '__main__':
+    input_file = '../../ref/a_example'  
+    meta, pizzas = read_input(input_file)
     #meta, pizzas = read_input('../../ref/a_example')
     print(f"Meta is {meta}, Pizza are {pizzas[0]}")
     
@@ -176,3 +185,4 @@ if __name__ == '__main__':
                 all_ops = (output, sc)
 
     print(f"finall op \n {all_ops}")
+    write_op(all_ops, input_file)
