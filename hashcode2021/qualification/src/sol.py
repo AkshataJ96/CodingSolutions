@@ -67,7 +67,7 @@ if __name__=='__main__':
         print(f"{intr[0]}")
         print(f"{len(intr[1])}")
         for strt in intr[1]:
-           print(strt.name)
+           print(f"{strt.name} 1")
 
 
         
