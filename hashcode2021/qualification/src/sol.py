@@ -48,7 +48,7 @@ def car_has_path(endpoint, cars):
     return count
 
 if __name__=='__main__':
-    in_file = "../ref/b.txt"
+    in_file = "../ref/c.txt"
     streets = list()
     cars = list()
     with open(in_file, 'r') as f:
@@ -65,9 +65,10 @@ if __name__=='__main__':
             line = f.readline()
             cars.append(Car(line, streets))
 
-    intersections = list()
+    intersections = dict()
 
-    for car in cars:
+    sortedcars = sorted(cars, key=lambda x: x.cost)
+    for car in sortedcars:
         if car.cost < ttime:
             for path in car.paths: 
                 curr_strt = get_street_by_name(path, streets)
@@ -75,17 +76,19 @@ if __name__=='__main__':
                 signal_times = list()
                 for intr in incoming:
                     signal_times.append(car_has_path(intr.end, cars))
-                intersections.append([curr_strt.end, convert_to_fmt(incoming, signal_times)])
+                val = intersections.get(curr_strt.end, None)
+                if val is None:
+                    intersections[curr_strt.end] = convert_to_fmt(incoming, signal_times)
                 ttime = ttime - curr_strt.time
 
     
     
     ### output printing
-    print(len(intersections))
-    for intr in intersections:
-        print(f"{intr[0]}")
-        print(f"{len(intr[1])}")
-        for strt in intr[1]:
+    print(len(intersections.keys()))
+    for intr, val in intersections.items():
+        print(f"{intr}")
+        print(f"{len(val)}")
+        for strt in val:
             for key, val in strt.items():
                 print(f"{key} {val}")
 
