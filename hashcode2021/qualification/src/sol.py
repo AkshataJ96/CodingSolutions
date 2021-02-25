@@ -15,6 +15,7 @@ class Car:
         self.paths = line
         # print(self.nstreets, self.paths)
         self.cost = self.calc_cost(streets)
+        self.paths_obj = [get_street_by_name(path, streets) for path in self.paths]
     
     def calc_cost(self, streets):
         cost = 0
@@ -32,8 +33,22 @@ def get_street_end_by_name(name, streets):
 def get_incoming(end, streets):
     return [street for street in streets if street.end==end]
 
+def convert_to_fmt(incoming, signal_times):
+    signals = list()
+    for instrt,waittime in zip(incoming, signal_times):
+        signals.append({instrt.name : waittime})
+    return signals
+
+def car_has_path(endpoint, cars):
+    count = 1
+    for car in cars:
+        for path in car.paths_obj:
+            if path.end == endpoint:
+                count = count + 1
+    return count
+
 if __name__=='__main__':
-    in_file = "../ref/a.txt"
+    in_file = "../ref/b.txt"
     streets = list()
     cars = list()
     with open(in_file, 'r') as f:
@@ -57,8 +72,12 @@ if __name__=='__main__':
             for path in car.paths: 
                 curr_strt = get_street_by_name(path, streets)
                 incoming = get_incoming(curr_strt.end, streets)
-                intersections.append([curr_strt.end, incoming])
+                signal_times = list()
+                for intr in incoming:
+                    signal_times.append(car_has_path(intr.end, cars))
+                intersections.append([curr_strt.end, convert_to_fmt(incoming, signal_times)])
                 ttime = ttime - curr_strt.time
+
     
     
     ### output printing
@@ -67,7 +86,8 @@ if __name__=='__main__':
         print(f"{intr[0]}")
         print(f"{len(intr[1])}")
         for strt in intr[1]:
-           print(f"{strt.name} 1")
+            for key, val in strt.items():
+                print(f"{key} {val}")
 
 
         
