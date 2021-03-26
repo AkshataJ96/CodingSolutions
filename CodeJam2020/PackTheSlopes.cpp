@@ -1,3 +1,9 @@
+/*
+Problem statement : https://codingcompetitions.withgoogle.com/codejam/round/000000000019ff31/00000000003b4f31
+
+Solution in c++: still work in progress
+*/
+
 #include<iostream>
 #include<algorithm>
 #include<vector>

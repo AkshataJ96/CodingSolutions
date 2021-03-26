@@ -1,3 +1,10 @@
+/*
+Problem statement : https://codingcompetitions.withgoogle.com/codejam/round/000000000019fd27/000000000020993c
+
+Solution in c++
+*/
+
+
 #include<iostream>
 #include<algorithm>
 #include<vector>
@@ -18,6 +25,7 @@ int main(){
     cin >> n;
 
     int x, trace = 0;
+    int row = 0; int col = 0, cnt;
     vector<int> init;
     for(int i = 0; i < n; i++){
         for(int j=0; j < n; j++){
@@ -27,24 +35,18 @@ int main(){
             trace = trace + x;
         }
         mat.push_back(init);
-        init.clear();
-    }
-    cout << "mat" << endl;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cout << mat[i][j];
-        }
-        cout << endl;
-    }
-    cout << endl;
-
-    int row = 0; int col = 0, cnt;
-    for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             cnt = count(mat[i].begin(), mat[i].end(), mat[i][j]);
-            if(cnt > 1)
+            if(cnt > 1){
                 ++row;
+                break;
+            }
+        }
+        init.clear();
+    }
 
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
             init.push_back(mat[j][i]);
         }
         crmat.push_back(init);
@@ -54,21 +56,14 @@ int main(){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             cnt = count(crmat[i].begin(), crmat[i].end(), crmat[i][j]);
-            if(cnt > 1)
+            if(cnt > 1){
                 ++col;
+                break;
+            }
         }
     }
 
-    cout << "crmat" << endl;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cout << crmat[i][j];
-        }
-        cout << endl;
-    }
-    cout << endl;
-
-    cout << "Case #" << c << ": " << trace << " " << row << " " << col;
+    cout << "Case #" << c << ": " << trace << " " << row << " " << col << endl;
 	c++;
     mat.clear(); crmat.clear();
     }
