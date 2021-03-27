@@ -14,14 +14,6 @@ Solution in c++
 using namespace std;
 bool sortfunc (long int i,long int j) { return (i<j); }
 
-void close(){
-
-}
-
-void open(){
-
-}
-
 int main(){
     
     int tstcase, len;
@@ -37,7 +29,7 @@ int main(){
     for(int i = 0; i < instr.length(); i++){
         inv.push_back(instr[i]);
     }
-    
+
     int lenv, pcnts = 0, pcnte = 0;
     vector<char> outv;
     for(auto i = 0; i < inv.size(); i++){
@@ -59,6 +51,8 @@ int main(){
         }        
     }
 
+    
+    //Include remaining close paramthesis
     lenv = outv.size();
     pcnts = count(outv.begin(), outv.end(), '(');
     pcnte = count(outv.begin(), outv.end(), ')');
@@ -67,7 +61,6 @@ int main(){
         for(int j = 0; j < (pcnts - pcnte); j++){
             outv.insert(outv.begin() + lenv, ')');
         }
-    //Include remaining close paramthesis
 
     cout << "Case #" << c << ": ";
     for(int i = 0; i < outv.size(); i++){
